@@ -1,1 +1,15 @@
+# Idea files
+test-output/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.ids
+
+# Eclipse files
+.classpath
+.project
+.settings
+
+# Maven files
 target/
