@@ -3,6 +3,7 @@ package net.lightoze.errbit;
 import net.lightoze.errbit.api.Backtrace;
 import net.lightoze.errbit.api.Error;
 import net.lightoze.errbit.api.Request;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 
@@ -28,7 +29,11 @@ public class Log4jNoticeBuilder extends NoticeBuilder {
             error.setBacktrace(new Backtrace());
             error.setClazz(event.getLoggerName());
         }
-        error.setMessage(event.getRenderedMessage());
+        String msg = event.getRenderedMessage();
+        if (StringUtils.isBlank(msg) && throwable != null) {
+            msg = throwable.toString();
+        }
+        error.setMessage(msg);
         return error;
     }
 
